@@ -6,15 +6,18 @@
     <title>Phuong Thanh | Trilingual MC & Content Creator</title>
     <meta name="description" content="Professional Trilingual MC (VN - EN - CN), Content Creator (TikTok @thankful.mp4), English Educator (IELTS/VSTEP), and Numerology Consultant.">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Thêm style cho chế độ admin */
+        .admin-edit-highlight { outline: 1px dashed #d4af37 !important; border-radius: 4px; }
+        .save-float-btn { position: fixed; bottom: 20px; right: 20px; z-index: 10000; padding: 15px 30px; background: #d4af37; color: black; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 40px rgba(0,0,0,0.6); font-family: sans-serif; }
+    </style>
 </head>
 <body>
-    <!-- BACKGROUND & GRID -->
     <div class="bg-gradient">
         <div class="gradient-sphere sphere-1"></div>
         <div class="gradient-sphere sphere-2"></div>
     </div>
 
-    <!-- NAVIGATION -->
     <nav>
         <div class="logo">PHUONG THANH.</div>
         <div class="nav-links">
@@ -25,7 +28,6 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <header id="home" class="hero">
         <div class="reveal">
             <h1 style="font-family: 'Playfair Display', serif;">Modern MC & <span>Creator</span>.</h1>
@@ -37,7 +39,6 @@
         </div>
     </header>
 
-    <!-- SERVICES & SKILLS -->
     <section id="services">
         <h2 class="section-title reveal">Multifaceted Professional</h2>
         <div class="projects-grid">
@@ -128,37 +129,90 @@
         </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about">
-        <h2 class="section-title reveal">Meet Phuong Thanh</h2>
-        <div class="contact-container reveal">
-            <p>Phuong Thanh is a versatile professional combining the elegance of a Trilingual MC, the precision of an English Language Educator, and the intuition of a Numerology Consultant. Based in Vietnam, she has dedicated her career to connecting people through communication, education, and meaningful insight.</p>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
     <section id="contact">
         <h2 class="section-title reveal">Direct Booking</h2>
         <div class="contact-container reveal">
             <h3>Start a Collaboration</h3>
-            <p style="margin-bottom: 2rem;">Choose your platform to reach out for bookings and inquiries:</p>
             <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
                 <a href="tel:0339468816" class="btn btn-primary" style="min-width: 250px;">Call: 0339468816</a>
                 <a href="mailto:contact.phuongthanh@gmail.com" class="btn btn-secondary" style="min-width: 250px;">Email: contact.phuongthanh@gmail.com</a>
                 <a href="https://m.me/PhuongThanh.bilingual" target="_blank" class="btn btn-secondary" style="min-width: 250px;">Facebook Chat</a>
-                <a href="https://www.tiktok.com/@thankful.mp4" target="_blank" class="btn btn-secondary" style="min-width: 250px; background: rgba(255, 0, 80, 0.1); border-color: rgba(255, 0, 80, 0.5);">TikTok Message</a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div style="padding: 4rem 10%; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-dim); font-size: 0.9rem;">
             &copy; 2026 Phuong Thanh Portfolio. 
         </div>
     </footer>
 
-    <!-- SCRIPT -->
-    <script src="script.js"></script>
+    <!-- SIÊU TRÌNH CHỈNH SỬA NHÚNG TRỰC TIẾP -->
+    <script>
+        const isAdminMode = true; // ĐỔI THÀNH FALSE KHI MUỐN KHÓA CHỈNH SỬA
+
+        function initEditor() {
+            console.log("Editor Initialized");
+            if (!isAdminMode) return;
+
+            // 1. Sửa text
+            const editable = 'h1, h2, h3, p, span, .btn, .logo';
+            document.querySelectorAll(editable).forEach(el => {
+                el.contentEditable = "true";
+                el.classList.add('admin-edit-highlight');
+            });
+
+            // 2. Sửa ảnh
+            document.querySelectorAll('img').forEach(img => {
+                img.style.cursor = "help";
+                img.addEventListener('click', () => {
+                    const u = prompt("Nhập link ảnh mới:", img.src);
+                    if(u) img.src = u;
+                });
+            });
+
+            // 3. Nút Thêm Card
+            const grid = document.querySelector('.projects-grid');
+            const addB = document.createElement('div');
+            addB.className = 'project-card reveal active';
+            addB.innerHTML = `<div style="height:320px; display:flex; align-items:center; justify-content:center; border:3px dashed #d4af37; cursor:pointer"><h3 style="color:#d4af37">+ THÊM DỊCH VỤ</h3></div>`;
+            addB.onclick = () => {
+                const clone = document.querySelector('.project-card').cloneNode(true);
+                clone.querySelectorAll(editable).forEach(e => { e.contentEditable = "true"; e.classList.add('admin-edit-highlight'); });
+                grid.insertBefore(clone, addB);
+            };
+            grid.appendChild(addB);
+
+            // 4. Nút Lưu
+            const sBtn = document.createElement('button');
+            sBtn.className = 'save-float-btn';
+            sBtn.innerText = '💾 XUẤT FILE ĐÃ SỬA';
+            sBtn.onclick = () => {
+                // Làm sạch code trước khi xuất
+                document.querySelectorAll('.admin-edit-highlight').forEach(e => { e.removeAttribute('contenteditable'); e.classList.remove('admin-edit-highlight'); });
+                addB.remove();
+                sBtn.remove();
+                
+                const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'index.html';
+                link.click();
+                alert("Đã xong! Hãy lấy file index.html vừa tải về để up lên GitHub.");
+                location.reload();
+            };
+            document.body.appendChild(sBtn);
+        }
+
+        // Chạy khi trang load xong
+        window.addEventListener('load', () => {
+            initEditor();
+            // Animation reveal
+            const obs = new IntersectionObserver((es) => {
+                es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+            }, {threshold: 0.1});
+            document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+        });
+    </script>
 </body>
 </html>
