@@ -7,11 +7,18 @@
     <meta name="description" content="Professional Trilingual MC (VN - EN - CN), Content Creator (TikTok @thankful.mp4), English Educator (IELTS/VSTEP), and Numerology Consultant.">
     <link rel="stylesheet" href="style.css">
     <style>
-        .admin-edit-highlight { outline: 1px dashed #d4af37 !important; border-radius: 4px; }
+        /* ADMIN STYLES */
+        .admin-edit-highlight { outline: 1px dashed #d4af37 !important; transition: 0.3s; }
         .save-float-btn { position: fixed; bottom: 20px; right: 20px; z-index: 10000; padding: 15px 30px; background: #d4af37; color: black; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
-        .img-edit-overlay { cursor: pointer; position: relative; }
-        .img-edit-overlay::after { content: '📷 ĐỔI ẢNH'; position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; font-size: 10px; border-radius: 4px; opacity: 0; transition: 0.3s; }
-        .img-edit-overlay:hover::after { opacity: 1; }
+        .img-edit-container { position: relative; overflow: hidden; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; background: #1a1a1e; }
+        .img-edit-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.2s; }
+        
+        .admin-img-tools { position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 5px; opacity: 0; transition: 0.3s; z-index: 10; }
+        .img-edit-container:hover .admin-img-tools { opacity: 1; }
+        
+        .admin-tool-btn { background: rgba(0,0,0,0.8); color: white; border: 1px solid #d4af37; padding: 5px 12px; font-size: 11px; cursor: pointer; border-radius: 4px; }
+        .admin-pos-slider { position: absolute; bottom: 10px; left: 10px; right: 10px; width: auto; accent-color: #d4af37; opacity: 0; transition: 0.3s; }
+        .img-edit-container:hover .admin-pos-slider { opacity: 1; }
     </style>
 </head>
 <body>
@@ -23,192 +30,157 @@
     <nav>
         <div class="logo">PHUONG THANH.</div>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#services">Portfolio</a>
-            <a href="#tiktok">Social</a>
-            <a href="#contact">Book Now</a>
+            <a href="#home">Home</a><a href="#services">Portfolio</a><a href="#tiktok">Social</a><a href="#contact">Book Now</a>
         </div>
     </nav>
 
     <header id="home" class="hero">
+        <div class="img-edit-container" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;">
+            <img src="project2.png" alt="Hero" style="object-position: center 50%;">
+        </div>
         <div class="reveal">
             <h1 style="font-family: 'Playfair Display', serif;">Modern MC & <span>Creator</span>.</h1>
             <p>Professional Trilingual MC (VN - EN - CN) | TikToker @thankful.mp4 <br> English Language Educator (IELTS / VSTEP) | Numerology Consultant.</p>
-            <div class="hero-btns">
-                <a href="tel:0339468816" class="btn btn-primary">Call Now</a>
-                <a href="https://www.tiktok.com/@thankful.mp4" target="_blank" class="btn btn-secondary">Follow TikTok</a>
-            </div>
+            <div class="hero-btns"><a href="tel:0339468816" class="btn btn-primary">Call Now</a><a href="https://www.tiktok.com/@thankful.mp4" target="_blank" class="btn btn-secondary">Follow TikTok</a></div>
         </div>
     </header>
 
     <section id="services">
         <h2 class="section-title reveal">Multifaceted Professional</h2>
         <div class="projects-grid">
-            <div class="project-card reveal" id="tiktok">
+            <!-- Project Cards -->
+            <div class="project-card reveal">
                 <div class="project-img">
-                    <img src="project6.png" alt="TikToker">
+                    <div class="img-edit-container"><img src="project6.png" style="object-position: center 50%;"></div>
                 </div>
                 <div class="project-info">
                     <h3>TikToker & Content Creator</h3>
-                    <p>Building a vibrant community on TikTok (@thankful.mp4). Available for brand collaborations, reviews, and professional content creation.</p>
-                    <div class="tags">
-                        <span>TikToker</span>
-                        <span>Influencer</span>
-                        <span>Booking</span>
-                    </div>
+                    <p>Building a vibrant community on TikTok (@thankful.mp4). Available for brand collaborations.</p>
+                    <div class="tags"><span>TikToker</span><span>Booking</span></div>
                 </div>
             </div>
 
             <div class="project-card reveal">
                 <div class="project-img">
-                    <img src="hero.png" alt="Trilingual MC">
+                    <div class="img-edit-container"><img src="hero.png" style="object-position: center 50%;"></div>
                 </div>
                 <div class="project-info">
                     <h3>Trilingual MC (VN - EN - CN)</h3>
-                    <p>Professional hosting in Vietnamese, English, and Chinese for high-end international conferences and summits.</p>
-                    <div class="tags">
-                        <span>VN-EN-CN</span>
-                        <span>Professional</span>
-                    </div>
+                    <p>Professional hosting in Vietnamese, English, and Chinese for high-end international conferences.</p>
+                    <div class="tags"><span>VN-EN-CN</span><span>Global</span></div>
                 </div>
             </div>
 
             <div class="project-card reveal">
                 <div class="project-img">
-                    <img src="project4.png" alt="English Educator">
+                    <div class="img-edit-container"><img src="project4.png" style="object-position: center 50%;"></div>
                 </div>
                 <div class="project-info">
                     <h3>English Educator (IELTS/VSTEP)</h3>
                     <p>Expert coaching for IELTS and VSTEP with specialized curriculum for high achievement.</p>
-                    <div class="tags">
-                        <span>Educator</span>
-                        <span>Expert</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card reveal">
-                <div class="project-img">
-                    <img src="project3.png" alt="TV Host">
-                </div>
-                <div class="project-info">
-                    <h3>TV Host & Professional Hosting</h3>
-                    <p>On-camera experience for television and professional media platforms.</p>
-                    <div class="tags">
-                        <span>Media</span>
-                        <span>On-Air</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card reveal">
-                <div class="project-img">
-                    <img src="project5.png" alt="Numerology">
-                </div>
-                <div class="project-info">
-                    <h3>Numerology Consultant</h3>
-                    <p>In-depth numerology readings to guide career and personal development.</p>
-                    <div class="tags">
-                        <span>Mindfulness</span>
-                        <span>Guidance</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card reveal">
-                <div class="project-img">
-                    <img src="project1.png" alt="Gala">
-                </div>
-                <div class="project-info">
-                    <h3>Gala & Corporate Events</h3>
-                    <p>Exceptional hosting for grand openings, awards, and industry galas.</p>
-                    <div class="tags">
-                        <span>Event</span>
-                        <span>Premium</span>
-                    </div>
+                    <div class="tags"><span>IELTS</span><span>Educator</span></div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
         <h2 class="section-title reveal">Direct Booking</h2>
         <div class="contact-container reveal">
-            <h3>Start a Collaboration</h3>
             <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
-                <a href="tel:0339468816" class="btn btn-primary" style="min-width: 250px;">Call: 0339468816</a>
-                <a href="mailto:contact.phuongthanh@gmail.com" class="btn btn-secondary" style="min-width: 250px;">Email: contact.phuongthanh@gmail.com</a>
-                <a href="https://m.me/PhuongThanh.bilingual" target="_blank" class="btn btn-secondary" style="min-width: 250px;">Facebook Chat</a>
+                <a href="tel:0339468816" class="btn btn-primary">Call: 0339468816</a>
+                <a href="mailto:contact.phuongthanh@gmail.com" class="btn btn-secondary">Email: contact.phuongthanh@gmail.com</a>
+                <a href="https://m.me/PhuongThanh.bilingual" target="_blank" class="btn btn-secondary">Facebook Chat</a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div style="padding: 4rem 10%; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-dim); font-size: 0.9rem;">
-            &copy; 2026 Phuong Thanh Portfolio. 
-        </div>
-    </footer>
-
-    <!-- SIÊU TRÌNH CHỈNH SỬA V2 - HỖ TRỢ CHỌN ẢNH TỪ MÁY TÍNH -->
+    <!-- ADMIN SCRIPT V3 -->
     <script>
-        const isAdminMode = true; 
+        const isAdminMode = true;
+
+        function injectImageTools(container) {
+            if (!isAdminMode) return;
+            const img = container.querySelector('img');
+            
+            // 1. Tool Box
+            const tools = document.createElement('div');
+            tools.className = 'admin-img-tools';
+            
+            const changeBtn = document.createElement('button');
+            changeBtn.className = 'admin-tool-btn';
+            changeBtn.innerText = '📷 ĐỔI ẢNH';
+            changeBtn.onclick = () => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = (e) => {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => img.src = ev.target.result;
+                    reader.readAsDataURL(e.target.files[0]);
+                };
+                input.click();
+            };
+
+            tools.appendChild(changeBtn);
+            container.appendChild(tools);
+
+            // 2. Position Slider (Dùng để căn chỉnh ảnh lên xuống)
+            const slider = document.createElement('input');
+            slider.type = 'range';
+            slider.className = 'admin-pos-slider';
+            slider.min = 0; slider.max = 100; slider.value = 50;
+            slider.oninput = (e) => {
+                img.style.objectPosition = `center ${e.target.value}%`;
+            };
+            container.appendChild(slider);
+        }
 
         function initEditor() {
             if (!isAdminMode) return;
 
-            // 1. Chỉnh sửa chữ
+            // Chỉnh sửa chữ
             document.querySelectorAll('h1, h2, h3, p, span, .btn, .logo').forEach(el => {
                 el.contentEditable = "true";
                 el.classList.add('admin-edit-highlight');
             });
 
-            // 2. Chỉnh sửa ảnh (Mở cửa sổ chọn file)
-            document.querySelectorAll('img').forEach(img => {
-                img.parentElement.classList.add('img-edit-overlay');
-                img.addEventListener('click', () => {
-                    const input = document.createElement('input');
-                    input.type = 'file';
-                    input.accept = 'image/*';
-                    input.onchange = (e) => {
-                        const file = e.target.files[0];
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            img.src = event.target.result; // Chuyển ảnh thành mã Base64
-                        };
-                        reader.readAsDataURL(file);
-                    };
-                    input.click();
-                });
-            });
+            // Chỉnh sửa ảnh cho toàn bộ ảnh đang có
+            document.querySelectorAll('.img-edit-container').forEach(injectImageTools);
 
-            // 3. Thêm card mới
+            // Nút Thêm Card
             const grid = document.querySelector('.projects-grid');
             const addB = document.createElement('div');
             addB.className = 'project-card reveal active';
             addB.innerHTML = `<div style="height:320px; display:flex; align-items:center; justify-content:center; border:3px dashed #d4af37; cursor:pointer"><h3 style="color:#d4af37">+ THÊM DỊCH VỤ</h3></div>`;
             addB.onclick = () => {
-                const clones = document.querySelectorAll('.project-card');
-                const clone = clones[0].cloneNode(true);
-                clone.querySelectorAll('h1, h2, h3, p, span').forEach(e => e.contentEditable = "true");
+                const firstCard = document.querySelector('.project-card');
+                const clone = firstCard.cloneNode(true);
+                clone.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
+                // Quan trọng: Phải nạp lại tính năng sửa ảnh cho Card mới
+                const newImgContainer = clone.querySelector('.img-edit-container');
+                newImgContainer.innerHTML = '<img src="hero.png" style="object-position: center 50%;">';
+                injectImageTools(newImgContainer);
                 grid.insertBefore(clone, addB);
             };
             grid.appendChild(addB);
 
-            // 4. Lưu lại
+            // Nút Lưu
             const sBtn = document.createElement('button');
             sBtn.className = 'save-float-btn';
-            sBtn.innerText = '💾 Lưu lại bản sửa rồi nhắn Thảo Anh tắt chế độ sửa';
+            sBtn.innerText = '💾 XUẤT FILE ĐÃ SỬA (LƯU TẤT CẢ)';
             sBtn.onclick = () => {
                 document.querySelectorAll('.admin-edit-highlight').forEach(e => e.removeAttribute('contenteditable'));
-                document.querySelectorAll('.admin-edit-highlight').forEach(e => e.classList.remove('admin-edit-highlight'));
-                addB.remove();
-                sBtn.remove();
+                document.querySelectorAll('.admin-img-tools, .admin-pos-slider, .save-float-btn').forEach(e => e.remove());
+                const lastCard = document.querySelector('.project-card:last-child');
+                if(lastCard && lastCard.innerText.includes('+')) lastCard.remove();
+                
                 const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
                 const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'index.html';
+                link.href = URL.createObjectURL(blob); link.download = 'index.html';
                 link.click();
-                alert("Hoàn tất! Hãy gửi file index.html này lên GitHub.");
+                alert("Đã Lưu! Hãy lấy file index.html mới nhất này up lên GitHub.");
                 location.reload();
             };
             document.body.appendChild(sBtn);
@@ -216,6 +188,7 @@
 
         window.addEventListener('load', () => {
             initEditor();
+            // Animation
             const obs = new IntersectionObserver((es) => {
                 es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
             }, {threshold: 0.1});
