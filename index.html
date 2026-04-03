@@ -7,9 +7,11 @@
     <meta name="description" content="Professional Trilingual MC (VN - EN - CN), Content Creator (TikTok @thankful.mp4), English Educator (IELTS/VSTEP), and Numerology Consultant.">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Thêm style cho chế độ admin */
         .admin-edit-highlight { outline: 1px dashed #d4af37 !important; border-radius: 4px; }
-        .save-float-btn { position: fixed; bottom: 20px; right: 20px; z-index: 10000; padding: 15px 30px; background: #d4af37; color: black; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 40px rgba(0,0,0,0.6); font-family: sans-serif; }
+        .save-float-btn { position: fixed; bottom: 20px; right: 20px; z-index: 10000; padding: 15px 30px; background: #d4af37; color: black; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+        .img-edit-overlay { cursor: pointer; position: relative; }
+        .img-edit-overlay::after { content: '📷 ĐỔI ẢNH'; position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; font-size: 10px; border-radius: 4px; opacity: 0; transition: 0.3s; }
+        .img-edit-overlay:hover::after { opacity: 1; }
     </style>
 </head>
 <body>
@@ -147,67 +149,73 @@
         </div>
     </footer>
 
-    <!-- SIÊU TRÌNH CHỈNH SỬA NHÚNG TRỰC TIẾP -->
+    <!-- SIÊU TRÌNH CHỈNH SỬA V2 - HỖ TRỢ CHỌN ẢNH TỪ MÁY TÍNH -->
     <script>
-        const isAdminMode = true; // ĐỔI THÀNH FALSE KHI MUỐN KHÓA CHỈNH SỬA
+        const isAdminMode = true; 
 
         function initEditor() {
-            console.log("Editor Initialized");
             if (!isAdminMode) return;
 
-            // 1. Sửa text
-            const editable = 'h1, h2, h3, p, span, .btn, .logo';
-            document.querySelectorAll(editable).forEach(el => {
+            // 1. Chỉnh sửa chữ
+            document.querySelectorAll('h1, h2, h3, p, span, .btn, .logo').forEach(el => {
                 el.contentEditable = "true";
                 el.classList.add('admin-edit-highlight');
             });
 
-            // 2. Sửa ảnh
+            // 2. Chỉnh sửa ảnh (Mở cửa sổ chọn file)
             document.querySelectorAll('img').forEach(img => {
-                img.style.cursor = "help";
+                img.parentElement.classList.add('img-edit-overlay');
                 img.addEventListener('click', () => {
-                    const u = prompt("Nhập link ảnh mới:", img.src);
-                    if(u) img.src = u;
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = 'image/*';
+                    input.onchange = (e) => {
+                        const file = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            img.src = event.target.result; // Chuyển ảnh thành mã Base64
+                        };
+                        reader.readAsDataURL(file);
+                    };
+                    input.click();
                 });
             });
 
-            // 3. Nút Thêm Card
+            // 3. Thêm card mới
             const grid = document.querySelector('.projects-grid');
             const addB = document.createElement('div');
             addB.className = 'project-card reveal active';
             addB.innerHTML = `<div style="height:320px; display:flex; align-items:center; justify-content:center; border:3px dashed #d4af37; cursor:pointer"><h3 style="color:#d4af37">+ THÊM DỊCH VỤ</h3></div>`;
             addB.onclick = () => {
-                const clone = document.querySelector('.project-card').cloneNode(true);
-                clone.querySelectorAll(editable).forEach(e => { e.contentEditable = "true"; e.classList.add('admin-edit-highlight'); });
+                const clones = document.querySelectorAll('.project-card');
+                const clone = clones[0].cloneNode(true);
+                clone.querySelectorAll('h1, h2, h3, p, span').forEach(e => e.contentEditable = "true");
                 grid.insertBefore(clone, addB);
             };
             grid.appendChild(addB);
 
-            // 4. Nút Lưu
+            // 4. Lưu lại
             const sBtn = document.createElement('button');
             sBtn.className = 'save-float-btn';
-            sBtn.innerText = '💾 LƯU BẢN ĐÃ SỬA RỒI NHẮN THẢO ANH';
+            sBtn.innerText = '💾 Lưu lại bản sửa rồi nhắn Thảo Anh tắt chế độ sửa';
             sBtn.onclick = () => {
-                // Làm sạch code trước khi xuất
-                document.querySelectorAll('.admin-edit-highlight').forEach(e => { e.removeAttribute('contenteditable'); e.classList.remove('admin-edit-highlight'); });
+                document.querySelectorAll('.admin-edit-highlight').forEach(e => e.removeAttribute('contenteditable'));
+                document.querySelectorAll('.admin-edit-highlight').forEach(e => e.classList.remove('admin-edit-highlight'));
                 addB.remove();
                 sBtn.remove();
-                
                 const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
                 link.download = 'index.html';
                 link.click();
-                alert("Đã xong! Hãy lấy file index.html vừa tải về để up lên GitHub.");
+                alert("Hoàn tất! Hãy gửi file index.html này lên GitHub.");
                 location.reload();
             };
             document.body.appendChild(sBtn);
         }
 
-        // Chạy khi trang load xong
         window.addEventListener('load', () => {
             initEditor();
-            // Animation reveal
             const obs = new IntersectionObserver((es) => {
                 es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
             }, {threshold: 0.1});
