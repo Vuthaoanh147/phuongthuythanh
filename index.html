@@ -20,8 +20,9 @@
         .img-edit-container:hover .admin-img-panel { opacity: 1; pointer-events: auto; }
         
         @media (max-width: 768px) {
-            .admin-sidebar { position: fixed; bottom: 0; top: auto; left: 0; width: 100%; border-radius: 20px 20px 0 0; padding-bottom: 30px; }
+            .admin-sidebar { position: fixed; bottom: 0; top: auto; left: 0; width: 100%; border-radius: 20px 20px 0 0; border-top: 1px solid #d4af37; }
             .hero-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0) 100%); }
+            .hero h1 { font-size: 2.8rem !important; }
         }
     </style>
 </head>
@@ -31,19 +32,23 @@
         <div class="gradient-sphere sphere-2"></div>
     </div>
 
-    <!-- ADMIN TOOLS SIDEBAR -->
+    <!-- ADMIN SIDEBAR -->
     <div id="admin-sidebar" class="admin-sidebar">
-        <h4>Text Editor</h4>
-        <p style="font-size: 10px; color: #888;">Select text on page, then use tools below:</p>
-        <select id="font-family"><option value="Outfit">Modern</option><option value="'Playfair Display', serif">Classic</option><option value="Arial">Sans</option></select>
-        <input type="number" id="font-size" placeholder="Size (px)">
+        <h4>Chỉnh sửa chữ</h4>
+        <p style="font-size: 10px; color: #888;">Chọn chữ trên trang, sau đó dùng các nút bên dưới:</p>
+        <select id="font-family">
+            <option value="Outfit">Modern (Hiện đại)</option>
+            <option value="'Playfair Display', serif">Classic (Cổ điển)</option>
+            <option value="Arial">Sans (Cơ bản)</option>
+        </select>
+        <input type="number" id="font-size" placeholder="Cỡ chữ (px)">
         <input type="color" id="text-color">
     </div>
 
     <nav>
         <div class="logo">PHUONG THANH.</div>
         <div class="nav-links">
-            <a href="#home">Home</a><a href="#services">Portfolio</a><a href="#tiktok">Social</a><a href="#contact">Book Now</a>
+            <a href="#home">Home</a><a href="#services">Portfolio</a><a href="#about">About</a><a href="#contact">Book Now</a>
         </div>
     </nav>
 
@@ -63,44 +68,66 @@
         </div>
     </header>
 
-    <!-- CONTENT CARDS (ALL 6 RESTORED) -->
+    <!-- SERVICES (ALL 6) -->
     <section id="services">
         <h2 class="section-title reveal">Multifaceted Professional</h2>
         <div class="projects-grid">
             <div class="project-card reveal">
-                <div class="project-img"><div class="img-edit-container"><img src="project6.png" style="object-position: center 50%;"></div></div>
-                <div class="project-info"><h3>TikToker & Content Creator</h3><p>Building a community on TikTok (@thankful.mp4).</p></div>
+                <div class="project-img"><div class="img-edit-container"><img src="project6.png" style="object-position: center 50%; scale:1;"></div></div>
+                <div class="project-info"><h3>TikToker & Content Creator</h3><p>Building a vibrant community on TikTok (@thankful.mp4). Brand collaborations & professional content creation.</p></div>
             </div>
             <div class="project-card reveal">
-                <div class="project-img"><div class="img-edit-container"><img src="hero.png" style="object-position: center 50%;"></div></div>
-                <div class="project-info"><h3>Trilingual MC</h3><p>Hosting in VN - EN - CN for global conferences.</p></div>
+                <div class="project-img"><div class="img-edit-container"><img src="hero.png" style="object-position: center 50%; scale:1;"></div></div>
+                <div class="project-info"><h3>Trilingual MC (VN-EN-CN)</h3><p>Hosting in Vietnamese, English, and Chinese for high-end international conferences and summits.</p></div>
             </div>
             <div class="project-card reveal">
-                <div class="project-img"><div class="img-edit-container"><img src="project4.png" style="object-position: center 50%;"></div></div>
-                <div class="project-info"><h3>English Educator</h3><p>IELTS / VSTEP Coaching with specialized curriculum.</p></div>
+                <div class="project-img"><div class="img-edit-container"><img src="project4.png" style="object-position: center 50%; scale:1;"></div></div>
+                <div class="project-info"><h3>English Educator (IELTS/VSTEP)</h3><p>Expert coaching for IELTS and VSTEP with specialized curriculum for high achievement.</p></div>
             </div>
             <div class="project-card reveal">
-                <div class="project-img"><div class="img-edit-container"><img src="project3.png" style="object-position: center 50%;"></div></div>
-                <div class="project-info"><h3>TV Host</h3><p>On-camera experience for television programs.</p></div>
+                <div class="project-img"><div class="img-edit-container"><img src="project3.png" style="object-position: center 50%; scale:1;"></div></div>
+                <div class="project-info"><h3>TV Host & Professional Hosting</h3><p>On-camera experience for television programs and professional media platforms.</p></div>
             </div>
             <div class="project-card reveal">
-                <div class="project-img"><div class="img-edit-container"><img src="project5.png" style="object-position: center 50%;"></div></div>
-                <div class="project-info"><h3>Numerology Consultant</h3><p>In-depth numerology readings for self-discovery.</p></div>
+                <div class="project-img"><div class="img-edit-container"><img src="project5.png" style="object-position: center 50%; scale:1;"></div></div>
+                <div class="project-info"><h3>Numerology Consultant</h3><p>In-depth numerology readings to guide career and personal development.</p></div>
             </div>
             <div class="project-card reveal">
-                <div class="project-img"><div class="img-edit-container"><img src="project1.png" style="object-position: center 50%;"></div></div>
-                <div class="project-info"><h3>Corporate Events</h3><p>Orchestrating grand gala and industry events.</p></div>
+                <div class="project-img"><div class="img-edit-container"><img src="project1.png" style="object-position: center 50%; scale:1;"></div></div>
+                <div class="project-info"><h3>Gala & Corporate Events</h3><p>Exceptional hosting for grand openings, award ceremonies, and industry galas.</p></div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
+    <!-- ABOUT SECTION (RESTORED) -->
+    <section id="about">
+        <h2 class="section-title reveal">Meet Phuong Thanh</h2>
         <div class="contact-container reveal">
-            <a href="tel:0339468816" class="btn btn-primary">Call: 0339468816</a>
+            <p>Phuong Thanh is a versatile professional combining the elegance of a Trilingual MC, the precision of an English Language Educator, and the intuition of a Numerology Consultant. Based in Vietnam, she has dedicated her career to connecting people through communication, education, and meaningful insight. Known for her captivating stage presence and ability to master both Vietnamese and English fluently, she brings a perfect blend of elegance and professionalism to every stage.</p>
         </div>
     </section>
 
+    <!-- CONTACT SECTION (RESTORED LINKS) -->
+    <section id="contact">
+        <h2 class="section-title reveal">Contact & Collaboration</h2>
+        <div class="contact-container reveal">
+            <h3 style="margin-bottom: 2rem;">Start a Discussion</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+                <a href="tel:0339468816" class="btn btn-primary" style="width: 100%; max-width: 300px;">Call Now: 0339468816</a>
+                <a href="mailto:contact.phuongthanh@gmail.com" class="btn btn-secondary" style="width: 100%; max-width: 300px;">Send Email</a>
+                <a href="https://m.me/PhuongThanh.bilingual" target="_blank" class="btn btn-secondary" style="width: 100%; max-width: 300px;">Facebook Chat</a>
+                <a href="https://www.tiktok.com/@thankful.mp4" target="_blank" class="btn btn-secondary" style="width: 100%; max-width: 300px;">TikTok Booking</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div style="padding: 4rem 10%; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-dim); font-size: 0.9rem;">
+            &copy; 2026 Phuong Thanh Portfolio. 
+        </div>
+    </footer>
+
+    <!-- ADMIN LOGIC -->
     <script>
         const isAdminMode = true; 
         let activeEl = null;
@@ -110,39 +137,40 @@
             return res ? "#" + res.map(x => parseInt(x).toString(16).padStart(2, '0')).join('') : "#ffffff";
         }
 
-        function initImgTools(container) {
+        function initImgTools(box) {
             if (!isAdminMode) return;
-            const img = container.querySelector('img');
+            const img = box.querySelector('img');
             const panel = document.createElement('div');
             panel.className = 'admin-img-panel';
             panel.innerHTML = `
-                <button style="background:#d4af37; border:none; padding:4px; font-size:10px; border-radius:4px; cursor:pointer">📷 ĐỔI ẢNH</button>
+                <div style="display:flex; gap:5px; margin-bottom:5px;">
+                    <button style="flex:1; background:#d4af37; border:none; padding:4px; font-size:9px; border-radius:3px; cursor:pointer">📷 ĐỔI ẢNH</button>
+                    <span style="font-size:9px; color:white">Zoom/Pos</span>
+                </div>
                 <input type="range" class="z" min="1" max="4" step="0.1" value="1" title="Zoom">
                 <input type="range" class="p" min="0" max="100" step="1" value="50" title="Vị trí">
             `;
             const z = panel.querySelector('.z'), p = panel.querySelector('.p');
             panel.querySelector('button').onclick = () => {
-                const inp = document.createElement('input'); inp.type='file'; inp.accept='image/*';
-                inp.onchange = e => {const r=new FileReader(); r.onload=v=>img.src=v.target.result; r.readAsDataURL(e.target.files[0])};
-                inp.click();
+                const i = document.createElement('input'); i.type='file'; i.accept='image/*';
+                i.onchange = e => {const r=new FileReader(); r.onload=v=>img.src=v.target.result; r.readAsDataURL(e.target.files[0])};
+                i.click();
             };
             const update = () => { img.style.transform=`scale(${z.value})`; img.style.objectPosition=`center ${p.value}%`; };
             z.oninput = update; p.oninput = update;
-            container.appendChild(panel);
+            box.appendChild(panel);
         }
 
         function initAll() {
-            // Essential Animations (Luôn luôn chạy)
+            // REVEAL ANIMATIONS
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
             }, {threshold: 0.1});
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // Admin Tools (Chỉ khi bật)
+            // ADMIN FEATURES
             if (!isAdminMode) {
-                const sidebar = document.getElementById('admin-sidebar');
-                if (sidebar) sidebar.remove();
-                return;
+                const sb = document.getElementById('admin-sidebar'); if(sb) sb.remove(); return;
             }
 
             document.querySelectorAll('h1, h2, h3, p, span, .btn, .logo').forEach(el => {
@@ -170,7 +198,7 @@
                 const clone = first.cloneNode(true);
                 clone.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable="true");
                 const imgBox = clone.querySelector('.img-edit-container');
-                imgBox.innerHTML = '<img src="hero.png" style="object-position: center 50%;">';
+                imgBox.innerHTML = '<img src="hero.png" style="object-position: center 50%; scale:1;">';
                 initImgTools(imgBox);
                 grid.insertBefore(clone, addB);
             };
@@ -187,7 +215,7 @@
                 const last = document.querySelector('.project-card:last-child'); if(last && last.innerText.includes('+')) last.remove();
                 const b = new Blob([document.documentElement.outerHTML], {type:'text/html'});
                 const link = document.createElement('a'); link.href=URL.createObjectURL(b); link.download='index.html'; link.click();
-                alert("Đã lưu! Hãy up file index.html mới này lên GitHub.");
+                alert("Đã lưu! Hãy lấy file index.html mới này up lên GitHub.");
                 location.reload();
             };
             document.body.appendChild(sBtn);
