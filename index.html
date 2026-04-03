@@ -7,25 +7,28 @@
     <meta name="description" content="Professional Trilingual MC (VN - EN - CN), Content Creator (TikTok @thankful.mp4), English Educator (IELTS/VSTEP), and Numerology Consultant.">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* PRO ADMIN STYLES */
+        /* CSS ADMIN V5 */
         .admin-edit-highlight { outline: 1.5px dashed #d4af37 !important; transition: 0.2s; cursor: text; }
         .save-float-btn { position: fixed; bottom: 20px; right: 20px; z-index: 10000; padding: 15px 30px; background: #d4af37; color: black; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
         
-        .img-edit-container { position: relative; overflow: hidden; background: #1a1a1e; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-        .img-edit-container img { width: 100%; height: 100%; object-fit: cover; transform-origin: center; transition: transform 0.1s ease-out; }
+        .img-edit-container { position: relative; overflow: hidden; background: #000; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .img-edit-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.1s; }
+        
+        /* Gradient Overlay khôi phục */
+        .hero-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to right, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%); z-index: 0; pointer-events: none; }
 
-        .admin-img-panel { position: absolute; bottom: 10px; left: 10px; right: 10px; background: rgba(0,0,0,0.85); padding: 10px; border-radius: 10px; display: flex; flex-direction: column; gap: 8px; z-index: 100; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .admin-img-panel { position: absolute; bottom: 10px; left: 10px; right: 10px; background: rgba(0,0,0,0.9); padding: 10px; border-radius: 8px; display: flex; flex-direction: column; gap: 5px; z-index: 100; opacity: 0; pointer-events: none; transition: 0.3s; }
         .img-edit-container:hover .admin-img-panel { opacity: 1; pointer-events: auto; }
-        .admin-btn-row { display: flex; gap: 5px; justify-content: space-between; margin-bottom: 5px; }
 
-        /* Text Toolbar */
-        #text-toolbar { position: fixed; background: #222; border: 1px solid #d4af37; border-radius: 8px; padding: 10px; display: none; z-index: 20000; box-shadow: 0 10px 40px rgba(0,0,0,0.8); gap: 10px; align-items: center; }
-        #text-toolbar select, #text-toolbar input { background: #333; color: white; border: 1px solid #444; padding: 3px; border-radius: 4px; font-size: 12px; }
+        /* Bảng điều khiển chữ cố định bên trái */
+        #admin-sidebar { position: fixed; left: 20px; top: 100px; width: 180px; background: #111; border: 1px solid #d4af37; border-radius: 12px; padding: 15px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 50px rgba(0,0,0,0.8); }
+        #admin-sidebar h4 { color: #d4af37; font-size: 12px; margin-bottom: 5px; text-transform: uppercase; }
+        #admin-sidebar select, #admin-sidebar input { background: #222; color: #fff; border: 1px solid #444; padding: 5px; border-radius: 4px; font-size: 13px; }
 
         @media (max-width: 768px) {
-            .hero { background: none !important; min-height: 80vh !important; }
-            .hero h1 { font-size: 2.5rem !important; }
-            .admin-img-panel { opacity: 0.9; pointer-events: auto; position: relative; bottom: 0; left: 0; right: 0; margin-top: 10px; }
+            #admin-sidebar { position: relative; top: 0; left: 0; width: 100%; margin-bottom: 20px; box-sizing: border-box; }
+            .hero-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0) 100%); }
+            .hero h1 { font-size: 2.8rem !important; }
         }
     </style>
 </head>
@@ -35,16 +38,20 @@
         <div class="gradient-sphere sphere-2"></div>
     </div>
 
-    <!-- TEXT TOOLBAR (HIDDEN BY DEFAULT) -->
-    <div id="text-toolbar">
-        <select id="font-family">
-            <option value="Outfit">Modern</option>
-            <option value="'Playfair Display', serif">Classic</option>
-            <option value="Arial">Basic</option>
+    <!-- BẢNG ĐIỀU KHIỂN CHỮ CỐ ĐỊNH -->
+    <div id="admin-sidebar" class="reveal active">
+        <h4>Chỉnh sửa chữ</h4>
+        <p style="font-size: 10px; color: #888;">Nhấn vào chữ trên web trước, sau đó chỉnh ở đây:</p>
+        <select id="font-family-side">
+            <option value="Outfit">Hiện đại (Modern)</option>
+            <option value="'Playfair Display', serif">Cổ điển (Classic)</option>
+            <option value="Arial">Cơ bản (Sans)</option>
+            <option value="'Times New Roman', serif">Trang trọng</option>
         </select>
-        <input type="number" id="font-size" placeholder="Size" style="width: 50px;">
-        <input type="color" id="text-color" title="Pick a color">
-        <button id="close-toolbar" style="background:#555; color:white; border:none; padding:3px 8px; border-radius:4px; font-size:10px; cursor:pointer">X</button>
+        <input type="number" id="font-size-side" placeholder="Cỡ chữ (px)">
+        <input type="color" id="text-color-side">
+        <hr style="border: 0.5px solid #333;">
+        <p id="target-info" style="font-size: 10px; color: #d4af37;">Đang chọn: Chưa có</p>
     </div>
 
     <nav>
@@ -54,14 +61,20 @@
         </div>
     </nav>
 
-    <header id="home" class="hero" style="overflow: visible;">
+    <header id="home" class="hero">
+        <!-- Ảnh nền & Overlay tối -->
         <div class="img-edit-container" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;">
-            <img id="hero-img" src="project2.png" style="object-position: center 50%; scale: 1;">
+            <img src="project2.png" style="object-position: center 50%; scale: 1;">
+            <div class="hero-overlay"></div>
         </div>
+        
         <div class="reveal">
-            <h1 id="hero-title" style="font-family: 'Playfair Display', serif;">Modern MC & <span>Creator</span>.</h1>
-            <p id="hero-desc">Professional Trilingual MC (VN - EN - CN) | TikToker @thankful.mp4 <br> English Language Educator (IELTS / VSTEP) | Numerology Consultant.</p>
-            <div class="hero-btns"><a href="tel:0339468816" class="btn btn-primary">Call Now</a><a href="https://www.tiktok.com/@thankful.mp4" target="_blank" class="btn btn-secondary">Follow TikTok</a></div>
+            <h1 style="font-family: 'Playfair Display', serif; position: relative;">Modern MC & <span>Creator</span>.</h1>
+            <p style="position: relative;">Professional Trilingual MC (VN - EN - CN) | TikToker @thankful.mp4 <br> English Language Educator (IELTS / VSTEP) | Numerology Consultant.</p>
+            <div class="hero-btns" style="position: relative;">
+                <a href="tel:0339468816" class="btn btn-primary">Call Now</a>
+                <a href="https://www.tiktok.com/@thankful.mp4" target="_blank" class="btn btn-secondary">Follow TikTok</a>
+            </div>
         </div>
     </header>
 
@@ -70,7 +83,7 @@
         <div class="projects-grid">
             <div class="project-card reveal">
                 <div class="project-img">
-                    <div class="img-edit-container"><img src="project6.png" style="object-position: center 50%; scale: 1;"></div>
+                    <div class="img-edit-container"><img src="project6.png" style="object-position: center 50%;"></div>
                 </div>
                 <div class="project-info">
                     <h3>TikToker & Content Creator</h3>
@@ -78,12 +91,19 @@
                     <div class="tags"><span>TikToker</span><span>Influencer</span></div>
                 </div>
             </div>
-            <!-- More cards cloned dynamically -->
+            <div class="project-card reveal">
+                <div class="project-img">
+                    <div class="img-edit-container"><img src="hero.png" style="object-position: center 50%;"></div>
+                </div>
+                <div class="project-info">
+                    <h3>Trilingual MC</h3>
+                    <p>Professional hosting in Vietnamese, English, and Chinese for high-end international conferences.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="contact">
-        <h2 class="section-title reveal">Direct Booking</h2>
         <div class="contact-container reveal">
             <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
                 <a href="tel:0339468816" class="btn btn-primary">Call: 0339468816</a>
@@ -92,100 +112,95 @@
         </div>
     </section>
 
+    <!-- ADMIN LOGIC V5 -->
     <script>
         const isAdminMode = true;
-        let currentEditingElement = null;
+        let activeEl = null;
 
-        function updateImage(img, scale, posY) {
-            img.style.transform = `scale(${scale})`;
-            img.style.objectPosition = `center ${posY}%`;
-        }
-
-        function createImgPanel(container) {
+        function initImgTools(box) {
             if (!isAdminMode) return;
-            const img = container.querySelector('img');
+            const img = box.querySelector('img');
             const panel = document.createElement('div');
             panel.className = 'admin-img-panel';
             panel.innerHTML = `
-                <div class="admin-btn-row">
-                    <button class="btn-change" style="background:#d4af37; border:none; border-radius:4px; padding:5px; font-size:11px; cursor:pointer">📷 ĐỔI ẢNH</button>
-                    <span style="color:white; font-size:10px">Zoom & Vị trí</span>
-                </div>
-                <input type="range" class="zoom-range" min="1" max="3" step="0.1" value="1" title="Zoom">
-                <input type="range" class="pos-range" min="0" max="100" step="1" value="50" title="Dịch chuyển">
+                <button style="background:#d4af37; border:none; padding:4px; font-size:10px; border-radius:4px; cursor:pointer">📷 ĐỔI ẢNH</button>
+                <input type="range" class="z" min="1" max="3" step="0.1" value="1">
+                <input type="range" class="p" min="0" max="100" step="1" value="50">
             `;
-            
-            const zoomInp = panel.querySelector('.zoom-range');
-            const posInp = panel.querySelector('.pos-range');
-            
-            panel.querySelector('.btn-change').onclick = () => {
-                const inp = document.createElement('input'); inp.type='file'; inp.accept='image/*';
-                inp.onchange = (e) => {
-                    const r = new FileReader(); r.onload = (ev) => img.src = ev.target.result;
-                    r.readAsDataURL(e.target.files[0]);
-                };
-                inp.click();
+            const z = panel.querySelector('.z'), p = panel.querySelector('.p');
+            panel.querySelector('button').onclick = () => {
+                const i = document.createElement('input'); i.type='file'; i.accept='image/*';
+                i.onchange=e=>{const r=new FileReader(); r.onload=v=>img.src=v.target.result; r.readAsDataURL(e.target.files[0])};
+                i.click();
             };
-
-            const handler = () => updateImage(img, zoomInp.value, posInp.value);
-            zoomInp.oninput = handler;
-            posInp.oninput = handler;
-
-            container.appendChild(panel);
-        }
-
-        function setupTextEditing() {
-            const toolbar = document.getElementById('text-toolbar');
-            
-            document.querySelectorAll('h1, h2, h3, p, span, .btn, .logo').forEach(el => {
-                el.contentEditable = "true";
-                el.classList.add('admin-edit-highlight');
-                
-                el.onfocus = (e) => {
-                    currentEditingElement = el;
-                    const rect = el.getBoundingClientRect();
-                    toolbar.style.display = 'flex';
-                    toolbar.style.top = `${window.scrollY + rect.top - 50}px`;
-                    toolbar.style.left = `${rect.left}px`;
-                    
-                    // Nạp giá trị hiện tại vào toolbar
-                    document.getElementById('font-size').value = parseInt(window.getComputedStyle(el).fontSize);
-                    document.getElementById('text-color').value = rgbToHex(window.getComputedStyle(el).color);
-                };
-            });
-
-            document.getElementById('font-family').onchange = (e) => { if(currentEditingElement) currentEditingElement.style.fontFamily = e.target.value; };
-            document.getElementById('font-size').oninput = (e) => { if(currentEditingElement) currentEditingElement.style.fontSize = e.target.value + 'px'; };
-            document.getElementById('text-color').oninput = (e) => { if(currentEditingElement) currentEditingElement.style.color = e.target.value; };
-            document.getElementById('close-toolbar').onclick = () => toolbar.style.display = 'none';
-        }
-
-        function rgbToHex(rgb) {
-            const result = rgb.match(/\d+/g);
-            return result ? "#" + result.map(x => parseInt(x).toString(16).padStart(2, '0')).join('') : "#ffffff";
+            const upd = () => { img.style.transform=`scale(${z.value})`; img.style.objectPosition=`center ${p.value}%`; };
+            z.oninput = upd; p.oninput = upd;
+            box.appendChild(panel);
         }
 
         window.onload = () => {
-            if (!isAdminMode) return;
-            setupTextEditing();
-            document.querySelectorAll('.img-edit-container').forEach(createImgPanel);
+            if (!isAdminMode) { document.getElementById('admin-sidebar').remove(); return; }
 
-            // Add Save Button
+            // Chỉnh sửa chữ
+            document.querySelectorAll('h1, h2, h3, p, span, .btn, .logo').forEach(el => {
+                el.contentEditable = "true";
+                el.classList.add('admin-edit-highlight');
+                el.onfocus = () => {
+                    activeEl = el;
+                    document.getElementById('target-info').innerText = "Đang chọn: " + (el.tagName);
+                    document.getElementById('font-size-side').value = parseInt(window.getComputedStyle(el).fontSize);
+                    document.getElementById('text-color-side').value = rgbToHex(window.getComputedStyle(el).color);
+                }
+            });
+
+            // Gắn sự kiện cho bảng điều khiển
+            document.getElementById('font-family-side').onchange = e => { if(activeEl) activeEl.style.fontFamily = e.target.value; };
+            document.getElementById('font-size-side').oninput = e => { if(activeEl) activeEl.style.fontSize = e.target.value + 'px'; };
+            document.getElementById('text-color-side').oninput = e => { if(activeEl) activeEl.style.color = e.target.value; };
+
+            // Chỉnh ảnh
+            document.querySelectorAll('.img-edit-container').forEach(initImgTools);
+
+            // Nút Thêm Card
+            const grid = document.querySelector('.projects-grid');
+            const addB = document.createElement('div');
+            addB.className = 'project-card reveal active';
+            addB.innerHTML = `<div style="height:320px; display:flex; align-items:center; justify-content:center; border:2px dashed #d4af37; cursor:pointer; color:#d4af37"><h3>+ THÊM CARD</h3></div>`;
+            addB.onclick = () => {
+                const clones = document.querySelectorAll('.project-card');
+                const clone = clones[0].cloneNode(true);
+                clone.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable="true");
+                const imgTag = clone.querySelector('.img-edit-container');
+                imgTag.innerHTML = '<img src="hero.png" style="object-position: center 50%;">';
+                initImgTools(imgTag);
+                grid.insertBefore(clone, addB);
+            };
+            grid.appendChild(addB);
+
+            // Nút Lưu
             const sBtn = document.createElement('button');
             sBtn.className = 'save-float-btn';
             sBtn.innerText = '💾 XUẤT FILE ĐÃ SỬA';
             sBtn.onclick = () => {
-                document.querySelectorAll('.admin-edit-highlight, .admin-img-panel, #text-toolbar, .save-float-btn').forEach(e => {
+                document.querySelectorAll('.admin-edit-highlight, #admin-sidebar, .admin-img-panel, .save-float-btn').forEach(e => {
                     e.removeAttribute('contenteditable');
-                    if(!e.classList.contains('btn')) e.remove();
+                    if(!e.classList.contains('btn') && !e.classList.contains('logo')) e.remove();
                 });
-                const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
-                alert("Đã lưu! Hãy up file mới này lên GitHub.");
+                const last = document.querySelector('.project-card:last-child');
+                if(last && last.innerText.includes('+')) last.remove();
+                
+                const b = new Blob([document.documentElement.outerHTML], {type:'text/html'});
+                const a = document.createElement('a'); a.href=URL.createObjectURL(b); a.download='index.html'; a.click();
+                alert("Đã lưu! Hãy lấy file index.html mới này up lên GitHub.");
                 location.reload();
             };
             document.body.appendChild(sBtn);
         };
+
+        function rgbToHex(rgb) {
+            const res = rgb.match(/\d+/g);
+            return res ? "#" + res.map(x => parseInt(x).toString(16).padStart(2, '0')).join('') : "#ffffff";
+        }
     </script>
 </body>
 </html>
